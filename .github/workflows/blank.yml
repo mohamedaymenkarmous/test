@@ -1,0 +1,27 @@
+on:
+  # Trigger analysis when pushing to main or an existing pull requests.  Also trigger on
+  # new pull requests
+  push:
+    branches:
+      - main
+  pull_request:
+      types: [opened, synchronize, reopened]
+  workflow_dispatch:
+  workflow_call:
+  repository_dispatch:
+    types: [test]
+
+name: Contrast Security Scan
+
+jobs:
+  build_and_scan:
+    permissions:
+        contents: write # for actions/checkout
+        security-events: write # for github/codeql-action/upload-sarif
+        actions: write # only required for a private repository by github/codeql-action/upload-sarif to get the Action run status
+    runs-on: ubuntu-latest
+    # check out project
+    steps:
+    - uses: actions/checkout@v2
+    # steps to build the artifact you want to scan
+    # -name: Build Project
