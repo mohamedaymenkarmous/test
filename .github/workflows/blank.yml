@@ -11,21 +11,21 @@ on:
   repository_dispatch:
     types: [test]
 
-name: Contrast Security Scan
+permissions:
+  actions: write
+  checks: write
+  contents: write
+  deployments: write
+  issues: write
+  packages: write
+  pull-requests: write
+  repository-projects: write
+  security-events: write
+  statuses: write
 
+name: Contrast Security Scan
 jobs:
   build_and_scan:
-    permissions:
-      actions: write
-      checks: write
-      contents: write
-      deployments: write
-      issues: write
-      packages: write
-      pull-requests: write
-      repository-projects: write
-      security-events: write
-      statuses: write
     runs-on: ubuntu-latest
     # check out project
     steps:
